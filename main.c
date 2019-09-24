@@ -1,15 +1,22 @@
 #include "monty.h"
 
+/**
+ * main - Init the program, compile code for monty
+ * @argc: number of arguments
+ * @argv: the arguments
+ *
+ * Return: the program
+ */
+
 int main(int argc, char **argv)
 {
 	char *buf = NULL;
-	chat *filename;
+	char *filename;
 	size_t buf_size = 0;
 
 	if (argc != 2)
-	{
-		printf("Error: no such file\n");
-		error(1);
-	}
+		perror("Error: no such file\n");
+
+	return (0);
 }
 
