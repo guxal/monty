@@ -29,6 +29,9 @@ int main(int argc, char **argv)
 		return (1);
 	}
 
+	while (getline(&buf, &buf_size, file) > 0)
+		printf("%s", buf);
+
 	return (0);
 }
 
