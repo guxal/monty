@@ -40,6 +40,20 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/**
+ * struct dba_s - global database for monty
+ * @input: lines of the file input[0] - the opcode, input[1] - integer
+ *
+ */
 
+typedef struct dba_s
+{
+	char **input;
+} dba_t;
+
+/*--- Global ---*/
+
+extern dba_t *dba;
+dba_t *dba;
 
 #endif
