@@ -13,6 +13,7 @@ int main(int argc, char **argv)
 	char *buf = NULL;
 	char *filename;
 	size_t buf_size = 0;
+	FILE *file;
 
 	if (argc != 2)
 	{
@@ -21,7 +22,12 @@ int main(int argc, char **argv)
 	}
 
 	filename = argv[argc - 1];
-	printf("%s\n", filename);
+	file = fopen(filename, "r");
+	if (file == NULL)
+	{
+		perror("Error: can't open file\n");
+		return (1);
+	}
 
 	return (0);
 }
