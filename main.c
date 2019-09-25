@@ -49,8 +49,9 @@ int main(int argc, char **argv)
 			continue;
 
 		copy[0] = strtok(buf, delim);
-		copy[1] = strtok(NULL, buf);
+		copy[1] = strtok(NULL, delim);
+		printf("%s %s\n", copy[0], copy[1]);
 	}
-	printf("%s\n%s", copy[0], copy[1]);
+	free(copy);
 	return (0);
 }
