@@ -15,7 +15,13 @@ int main(int argc, char **argv)
 	size_t buf_size = 0;
 
 	if (argc != 2)
+	{
 		perror("Error: no such file\n");
+		return(1);
+	}
+
+	filename = argv[argc - 1];
+	printf("%s\n", filename);
 
 	return (0);
 }
