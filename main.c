@@ -1,7 +1,12 @@
 #include "monty.h"
 void _push(stack_t **stack, unsigned int line_number)
 {
-	printf("hola");
+	printf("hola\n");
+}
+
+void _pall(stack_t **stack, unsigned int line_number)
+{
+	printf("david\n");
 }
 /**
  * main - Init the program, compile code for monty
@@ -18,7 +23,7 @@ int main(int argc, char **argv)
 	size_t buf_size = 0;
 	FILE *file;
 	int i = 0, len = 0;
-	instruction_t func[] = { {"push", _push}, {NULL, NULL}};
+	instruction_t func[] = { {"push", _push}, {"pall", _pall}, {NULL, NULL}};
 	stack_t **stack = NULL;
 
 	delim = "\n ";
