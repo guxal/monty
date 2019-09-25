@@ -1,8 +1,22 @@
 #include "monty.h"
+
+/**
+ * _push - add new node in the beginnig of the stack.
+ * @stack: head of stack (double linked list).
+ * @line_number: the number of the line.
+ */
+
 void _push(stack_t **stack, unsigned int line_number)
 {
-	printf("hola\n");
+	(void)line_number;
+	
 }
+
+/**
+ * _pall - prints all the values on the stack
+ * @stack: head of stack (double linked list).
+ * @line_number: the number of the line.
+ */
 
 void _pall(stack_t **stack, unsigned int line_number)
 {
@@ -19,12 +33,11 @@ void _pall(stack_t **stack, unsigned int line_number)
 int main(int argc, char **argv)
 {
 	char *buf = NULL, *filename = NULL, *delim = NULL, *new = NULL;
-	char **copy;
 	size_t buf_size = 0;
 	FILE *file;
 	int i = 0, len = 0;
 	instruction_t func[] = { {"push", _push}, {"pall", _pall}, {NULL, NULL}};
-	stack_t **stack = NULL;
+	stack_t *stack = NULL;
 
 	delim = "\n ";
 
@@ -43,8 +56,15 @@ int main(int argc, char **argv)
 		return (1);
 	}
 
-	copy = malloc(sizeof(char *) * 3);
-	if (!copy)
+	dba = malloc(sizeof(dba_t));
+	if (!dba)
+	{
+		perror("malloc");
+		return (1);
+	}
+
+	dba->input = malloc(sizeof(char *) * 3);
+	if (!dba->input)
 	{
 		perror("malloc");
 		return (1);
@@ -60,22 +80,22 @@ int main(int argc, char **argv)
 		if (i == len)
 			continue;
 
-		copy[0] = strtok(buf, delim);
-		copy[1] = strtok(NULL, delim);
-		printf("%s %s\n", copy[0], copy[1]);
+		dba->input[0] = strtok(buf, delim);
+		dba->input[1] = strtok(NULL, delim);
+		printf("%s %s\n", dba->input[0], dba->input[1]);
 
 		i = 0;
 		while (func[i].opcode != NULL)
 		{
-			if (strncmp(func[i].opcode, copy[0], strlen(copy[0])) == 0)
+			if (strncmp(func[i].opcode, dba->input[0], strlen(dba->input[0])) == 0)
 			{
-				func[i].f(stack, 1);
+				func[i].f(&stack, 1);
 				break;
 			}
 			i++;
 		}
 	}
 
-	free(copy);
+	free(dba->input);
 	return (0);
 }
