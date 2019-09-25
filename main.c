@@ -1,5 +1,8 @@
 #include "monty.h"
-
+void _push(stack_t **stack, unsigned int line_number)
+{
+	printf("hola");
+}
 /**
  * main - Init the program, compile code for monty
  * @argc: number of arguments
@@ -15,8 +18,11 @@ int main(int argc, char **argv)
 	size_t buf_size = 0;
 	FILE *file;
 	int i = 0, len = 0;
+	instruction_t func[] = { {"push", _push}, {NULL, NULL}};
+	stack_t **stack = NULL;
 
 	delim = "\n ";
+
 	if (argc != 2)
 	{
 		perror("Error: no such file\n");
@@ -25,6 +31,7 @@ int main(int argc, char **argv)
 
 	filename = argv[argc - 1];
 	file = fopen(filename, "r");
+
 	if (file == NULL)
 	{
 		perror("Error: can't open file\n");
@@ -51,7 +58,19 @@ int main(int argc, char **argv)
 		copy[0] = strtok(buf, delim);
 		copy[1] = strtok(NULL, delim);
 		printf("%s %s\n", copy[0], copy[1]);
+
+		i = 0;
+		while (func[i].opcode != NULL)
+		{
+			if (strncmp(func[i].opcode, copy[0], strlen(copy[0])) == 0)
+			{
+				func[i].f(stack, 1);
+				break;
+			}
+			i++;
+		}
 	}
+
 	free(copy);
 	return (0);
 }
