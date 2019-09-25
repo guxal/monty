@@ -60,6 +60,7 @@ int is_number(char *num);
 
 /*--- add in stack ---*/
 void _push(stack_t **, unsigned int line_number);
+void _pall(stack_t **stack, unsigned int line_number);
 void add_dnodeint(stack_t **, stack_t *);
 
 #endif
