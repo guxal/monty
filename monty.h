@@ -52,8 +52,13 @@ typedef struct dba_s
 } dba_t;
 
 /*--- Global ---*/
-
 extern dba_t *dba;
 dba_t *dba;
+
+/*--- Integer ---*/
+int is_number(char *num);
+
+/*--- add in stack ---*/
+void _push(stack_t **stack, unsigned int line_number);
 
 #endif
