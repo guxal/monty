@@ -49,7 +49,7 @@ void add_dnodeint(stack_t **stack, stack_t *new)
 void _pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp = NULL;
-
+	(void) line_number;
 	tmp = *stack;
 	while (tmp)
 	{
