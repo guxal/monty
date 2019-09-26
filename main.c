@@ -1,10 +1,23 @@
 #include "monty.h"
 /**
+ * __RETURN__ - return posix
+ * @string: string
+ * @str: param
+ * @str1: param
+ * Return: exit
+ **/
+void __RETURN__(char *string, char *str, char *str1)
+{
+	dprintf(STDERR_FILENO, string, str, str1);
+	exit(EXIT_FAILURE);
+}
+/**
  * myStartupFun - construct init function
  */
 void myStartupFun(void)
 {
-	instruction_t func[] = {{"push", _push}, {"pall", _pall}, {"pint", _pint}, {NULL, NULL}};
+	instruction_t func[] = { {"push", _push}, {"pall", _pall},
+		{"pint", _pint}, {NULL, NULL}};
 
 	dba = malloc(sizeof(dba_t));
 	if (!dba)
@@ -38,15 +51,12 @@ int main(int argc, char **argv)
 	stack_t *stack = NULL;
 
 	if (argc != 2)
-		return (__RETURN__("USAGE: monty file\n", 1));
+		__RETURN__("USAGE: monty file\n", "", "");
 
 	filename = argv[argc - 1];
 	file = fopen(filename, "r");
 	if (file == NULL)
-	{
-		fprintf(stderr, "Error: can't open file %s\n", filename);
-		return (1);
-	}
+		__RETURN__("Error: can't open file %s\n", filename, "");
 	while (getline(&buf, &buf_size, file) > 0)
 	{
 		new = buf, len = strlen(buf), _continue = false;

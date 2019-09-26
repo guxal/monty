@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <unistd.h>
 /*--- Start ---*/
 void myStartupFun(void) __attribute__ ((constructor));
 
@@ -13,13 +13,6 @@ void myStartupFun(void) __attribute__ ((constructor));
 typedef int bool;
 #define true 1
 #define false 0
-
-#define __RETURN__(str, value) \
-	(__extension__ \
-	 ({ \
-	  fprintf(stderr, "%s", str); \
-	  value; \
-	  }))
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
