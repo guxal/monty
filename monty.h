@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+void myStartupFun (void) __attribute__ ((constructor));
 /*--- Structs ---*/
 
 /**
@@ -49,6 +50,7 @@ typedef struct instruction_s
 typedef struct dba_s
 {
 	char **input;
+	instruction_t *func;
 } dba_t;
 
 /*--- Global ---*/

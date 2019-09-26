@@ -1,5 +1,23 @@
 #include "monty.h"
 
+/* implementation of myStartupFun */
+void myStartupFun (void)
+{
+	instruction_t func[] = {{"push", _push}, {NULL, NULL}};
+
+	dba = malloc(sizeof(dba_t));
+	if(!dba)
+		exit(1);
+
+	dba->func = func;
+
+	dba->input = malloc(sizeof(char *) * 3);
+	if (!dba->input)
+	{
+		perror("malloc");
+		exit (1);
+	}
+}
 /**
  * _pall - prints all the values on the stack
  * @stack: head of stack (double linked list).
@@ -25,7 +43,6 @@ int main(int argc, char **argv)
 	FILE *file;
 	int i = 0, len = 0;
 	unsigned int linenum = 0;
-	instruction_t func[] = { {"push", _push}, {"pall", _pall}, {NULL, NULL}};
 	stack_t *stack = NULL;
 
 	delim = "\n ";
@@ -45,19 +62,7 @@ int main(int argc, char **argv)
 		return (1);
 	}
 
-	dba = malloc(sizeof(dba_t));
-	if (!dba)
-	{
-		perror("malloc");
-		return (1);
-	}
 
-	dba->input = malloc(sizeof(char *) * 3);
-	if (!dba->input)
-	{
-		perror("malloc");
-		return (1);
-	}
 
 	while (getline(&buf, &buf_size, file) > 0)
 	{
@@ -71,13 +76,12 @@ int main(int argc, char **argv)
 
 		dba->input[0] = strtok(buf, delim);
 		dba->input[1] = strtok(NULL, delim);
-
 		i = 0;
-		while (func[i].opcode != NULL)
+		while (dba->func[i].opcode != NULL)
 		{
-			if (strncmp(func[i].opcode, dba->input[0], strlen(dba->input[0])) == 0)
+			if (strncmp(dba->func[i].opcode, dba->input[0], strlen(dba->input[0])) == 0)
 			{
-				func[i].f(&stack, linenum);
+				dba->func[i].f(&stack, linenum);
 				break;
 			}
 			i++;
