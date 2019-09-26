@@ -39,7 +39,7 @@ int main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		perror("Error: no such file\n");
+		fprintf(stderr, "USAGE: monty file\n");
 		return (1);
 	}
 	filename = argv[argc - 1];
