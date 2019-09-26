@@ -7,8 +7,8 @@
 #include <string.h>
 #include <unistd.h>
 /*--- Start ---*/
-void myStartupFun(void) __attribute__ ((constructor));
-
+void myStartupFun(void);
+void __RETURN__(char *string, char *str, char *str1);
 /*--- Structs ---*/
 typedef int bool;
 #define true 1

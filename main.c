@@ -52,11 +52,10 @@ int main(int argc, char **argv)
 
 	if (argc != 2)
 		__RETURN__("USAGE: monty file\n", "", "");
-
-	filename = argv[argc - 1];
-	file = fopen(filename, "r");
+	filename = argv[argc - 1], file = fopen(filename, "r");
 	if (file == NULL)
 		__RETURN__("Error: can't open file %s\n", filename, "");
+	myStartupFun();
 	while (getline(&buf, &buf_size, file) > 0)
 	{
 		new = buf, len = strlen(buf), _continue = false;
