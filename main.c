@@ -21,17 +21,14 @@ void myStartupFun(void)
 
 	dba = malloc(sizeof(dba_t));
 	if (!dba)
-		exit(1);
+		__RETURN__("Error: malloc failed", "", "");
 
 	dba->func = malloc((sizeof(instruction_t) * 4) + 1);
 	memcpy(dba->func, func, sizeof(func));
 
 	dba->input = malloc(sizeof(char *) * 3);
 	if (!dba->input)
-	{
-		perror("malloc");
-		exit(1);
-	}
+		__RETURN__("Error: malloc failed", "", "");
 }
 /**
  * main - Init the program, compile code for monty
