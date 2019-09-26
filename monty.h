@@ -6,7 +6,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+/*--- Start ---*/
 void myStartupFun(void) __attribute__ ((constructor));
+
 /*--- Structs ---*/
 typedef int bool;
 #define true 1
@@ -72,6 +74,7 @@ int is_number(char *num);
 /*--- add in stack ---*/
 void _push(stack_t **, unsigned int line_number);
 void _pall(stack_t **stack, unsigned int line_number);
+void _pint(stack_t **stack, unsigned int line_number);
 void add_dnodeint(stack_t **, stack_t *);
 
 #endif

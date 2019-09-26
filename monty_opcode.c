@@ -1,9 +1,11 @@
 #include "monty.h"
+
 /**
  * _push - add new node in the beginnig of the stack.
  * @stack: head of stack (double linked list).
  * @line_number: the number of the line.
  */
+
 void _push(stack_t **stack, unsigned int line_number)
 {
 	char *num = NULL;
@@ -26,6 +28,7 @@ void _push(stack_t **stack, unsigned int line_number)
 	new->n = atoi(num);
 	add_dnodeint(stack, new);
 }
+
 /**
  * add_dnodeint - Add node in the first position
  * @stack: the header of de double linked list
@@ -33,6 +36,7 @@ void _push(stack_t **stack, unsigned int line_number)
  *
  * Return: double linked list
  */
+
 void add_dnodeint(stack_t **stack, stack_t *new)
 {
 	new->prev = NULL;
@@ -41,11 +45,13 @@ void add_dnodeint(stack_t **stack, stack_t *new)
 		(*stack)->prev = new;
 	*stack = new;
 }
+
 /**
  * _pall - prints all the values on the stack
  * @stack: head of stack (double linked list).
  * @line_number: the number of the line.
  */
+
 void _pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp = NULL;
@@ -56,4 +62,20 @@ void _pall(stack_t **stack, unsigned int line_number)
 		printf("%d\n", tmp->n);
 		tmp = tmp->next;
 	}
+}
+
+/**
+ * _pint - prints the value at the top of the stack, followed by a new line.
+ * @stack: head of stack (double linked list).
+ * @line_number: the number of the line.
+ */
+
+void _pint(stack_t **stack, unsigned int line_number)
+{
+	if (*stack == NULL)
+	{
+		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+		return (1);
+	}
+	printf("%d\n", (*stack)->n);
 }

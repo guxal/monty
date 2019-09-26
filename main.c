@@ -44,7 +44,7 @@ int main(int argc, char **argv)
 	file = fopen(filename, "r");
 	if (file == NULL)
 	{
-		perror("Error: can't open file\n");
+		fprintf(stderr, "Error: can't open file %s\n", filename);
 		return (1);
 	}
 	while (getline(&buf, &buf_size, file) > 0)
