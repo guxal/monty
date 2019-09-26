@@ -9,7 +9,6 @@
 /*--- Start ---*/
 void myStartupFun(void);
 void __RETURN__(char *string, char *str, char *str1);
-void free_all(void);
 /*--- Structs ---*/
 typedef int bool;
 #define true 1
@@ -70,5 +69,7 @@ void _push(stack_t **, unsigned int line_number);
 void _pall(stack_t **stack, unsigned int line_number);
 void _pint(stack_t **stack, unsigned int line_number);
 void add_dnodeint(stack_t **, stack_t *);
+
+void free_all(stack_t **stack, FILE *file);
 
 #endif
