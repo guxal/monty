@@ -8,7 +8,16 @@
 
 void myStartupFun(void) __attribute__ ((constructor));
 /*--- Structs ---*/
+typedef int bool;
+#define true 1
+#define false 0
 
+#define __RETURN__(str, value) \
+	(__extension__ \
+	 ({ \
+	  fprintf(stderr, "%s", str); \
+	  value; \
+	  }))
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
