@@ -13,6 +13,7 @@ void __RETURN__(char *string, char *str, char *str1);
 typedef int bool;
 #define true 1
 #define false 0
+#define atoa(x) #x
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer

@@ -110,9 +110,9 @@ int main(int argc, char **argv)
 		}
 		if (_continue)
 			continue;
-		fprintf(stderr, "L%d: unknown instruction %s\n", linenum, dba->input[0]);
-		free_all(&stack, file);
-		return (1);
-	} free_all(&stack, file);
-	return (0);
+		dprintf(STDERR_FILENO, "L%d: unknown instruction %s\n", linenum, dba->input[0]);
+		exit(EXIT_FAILURE);
+	} free_all();
+	fclose(file);
+	return (EXIT_SUCCESS);
 }
