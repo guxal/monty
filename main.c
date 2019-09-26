@@ -70,7 +70,7 @@ int main(int argc, char **argv)
 		i = 0;
 		while (dba->func[i].opcode != NULL)
 		{
-			if (strncmp(dba->func[i].opcode, dba->input[0], strlen(dba->input[0])) == 0)
+			if (strcmp(dba->func[i].opcode, dba->input[0]) == 0)
 			{
 				dba->func[i].f(&stack, linenum), _continue = true;
 				break;
