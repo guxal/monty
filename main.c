@@ -30,6 +30,30 @@ void myStartupFun(void)
 	if (!dba->input)
 		__RETURN__("Error: malloc failed", "", "");
 }
+
+/**
+ *
+ *
+ *
+ **/
+void free_all(void)
+{
+
+	if (dba != NULL)
+	{
+		if (dba->input != NULL)
+			free(dba->input);
+		free(dba->func);
+		/*
+		*while(dba->func[i].opcode)
+		*{
+		*	free(dba->func[i].opcode);
+		*	i++;
+		*}
+		*free(dba->func);
+		*/
+	}
+}
 /**
  * main - Init the program, compile code for monty
  * @argc: number of arguments
@@ -76,6 +100,6 @@ int main(int argc, char **argv)
 			continue;
 		fprintf(stderr, "L%d: unknown instruction %s\n", linenum, dba->input[0]);
 		return (1);
-	} free(dba->input);
+	} free_all();
 	return (0);
 }

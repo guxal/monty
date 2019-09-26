@@ -9,6 +9,7 @@
 /*--- Start ---*/
 void myStartupFun(void);
 void __RETURN__(char *string, char *str, char *str1);
+void free_all(void);
 /*--- Structs ---*/
 typedef int bool;
 #define true 1
