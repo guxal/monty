@@ -3,13 +3,14 @@
 /* implementation of myStartupFun */
 void myStartupFun (void)
 {
-	instruction_t func[] = {{"push", _push}, {NULL, NULL}};
+	instruction_t func[] = {{"push", _push}, {"pall", _pall}, {NULL, NULL}};
 
 	dba = malloc(sizeof(dba_t));
 	if(!dba)
 		exit(1);
 
-	dba->func = func;
+	dba->func = malloc((sizeof(instruction_t) * 3) + 1);
+	memcpy(dba->func, func, sizeof(func));
 
 	dba->input = malloc(sizeof(char *) * 3);
 	if (!dba->input)
@@ -67,6 +68,7 @@ int main(int argc, char **argv)
 		dba->input[0] = strtok(buf, delim);
 		dba->input[1] = strtok(NULL, delim);
 		i = 0;
+		//printf("%s", dba->func[3].opcode);
 		while (dba->func[i].opcode != NULL)
 		{
 			if (strncmp(dba->func[i].opcode, dba->input[0], strlen(dba->input[0])) == 0)
