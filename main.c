@@ -33,15 +33,13 @@ int main(int argc, char **argv)
 	char *buf = NULL, *filename = NULL, *delim = "\n ", *new = NULL;
 	size_t buf_size = 0;
 	FILE *file;
-	int i = 0, len = 0;
+	int i = 0, len = 0, _continue;
 	unsigned int linenum = 0;
 	stack_t *stack = NULL;
 
 	if (argc != 2)
-	{
-		fprintf(stderr, "USAGE: monty file\n");
-		return (1);
-	}
+		return (__RETURN__("USAGE: monty file\n", 1));
+
 	filename = argv[argc - 1];
 	file = fopen(filename, "r");
 	if (file == NULL)
@@ -51,7 +49,7 @@ int main(int argc, char **argv)
 	}
 	while (getline(&buf, &buf_size, file) > 0)
 	{
-		new = buf, len = strlen(buf);
+		new = buf, len = strlen(buf), _continue = false;
 		linenum++;
 		while ((new[i] == delim[0]) || (new[i] == delim[1]))
 			i++;
@@ -64,10 +62,14 @@ int main(int argc, char **argv)
 		{
 			if (strncmp(dba->func[i].opcode, dba->input[0], strlen(dba->input[0])) == 0)
 			{
-				dba->func[i].f(&stack, linenum);
+				dba->func[i].f(&stack, linenum), _continue = true;
 				break;
 			} i++;
 		}
+		if (_continue)
+			continue;
+		fprintf(stderr, "L%d: unknown instruction %s\n", linenum, dba->input[0]);
+		return (1);
 	} free(dba->input);
 	return (0);
 }
