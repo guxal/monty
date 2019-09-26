@@ -13,7 +13,7 @@ int is_number(char *num)
 
 	for (i = 0; num[i] != 0; i++)
 	{
-		if (((num[i] > 47) && (num[i] < 58)) || num[i] == 45 )
+		if (((num[i] > 47) && (num[i] < 58)) || num[i] == 45)
 			continue;
 		else
 			return (0);
