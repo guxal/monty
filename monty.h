@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void myStartupFun (void) __attribute__ ((constructor));
+void myStartupFun(void) __attribute__ ((constructor));
 /*--- Structs ---*/
 
 /**
@@ -44,7 +44,7 @@ typedef struct instruction_s
 /**
  * struct dba_s - global database for monty
  * @input: lines of the file input[0] - the opcode, input[1] - integer
- *
+ * @func: is the struct opcodes
  */
 
 typedef struct dba_s
