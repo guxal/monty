@@ -99,7 +99,7 @@ int main(int argc, char **argv)
 		__RETURN__("USAGE: monty file\n", "", "");
 	filename = argv[argc - 1], file = fopen(filename, "r");
 	if (file == NULL)
-		__RETURN__("Error: can't open file %s\n", filename, "");
+		__RETURN__("Error: Can't open file %s\n", filename, "");
 	myStartupFun();
 	while (getline(&buf, &buf_size, file) > 0)
 	{
