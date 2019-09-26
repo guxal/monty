@@ -41,9 +41,9 @@ void myStartupFun(void)
 }
 
 /**
- *
- *
- *
+ * free_all - free all
+ * @stack: stack
+ * @file: file
  **/
 void free_all(stack_t **stack, FILE *file)
 {
@@ -67,6 +67,17 @@ void free_all(stack_t **stack, FILE *file)
 	free(dba);
 	fclose(file);
 }
+/**
+ * UNKNOW_ERROR - dprintf error
+ * @linenum: number line error
+ * @input: opcode instruction
+ */
+void UNKNOW_ERROR(unsigned int linenum, char *input)
+{
+	dprintf(STDERR_FILENO, "L%d: unknown instruction %s\n",
+			linenum, input);
+}
+
 /**
  * main - Init the program, compile code for monty
  * @argc: number of arguments
@@ -92,14 +103,12 @@ int main(int argc, char **argv)
 	myStartupFun();
 	while (getline(&buf, &buf_size, file) > 0)
 	{
-		new = buf, len = strlen(buf), _continue = false;
-		linenum++;
+		new = buf, len = strlen(buf), _continue = false, linenum++;
 		while ((new[i] == delim[0]) || (new[i] == delim[1]))
 			i++;
 		if (i == len)
 			continue;
-		dba->input[0] = strtok(buf, delim);
-		dba->input[1] = strtok(NULL, delim);
+		dba->input[0] = strtok(buf, delim), dba->input[1] = strtok(NULL, delim);
 		i = 0;
 		while (dba->func[i].opcode != NULL)
 		{
@@ -111,9 +120,8 @@ int main(int argc, char **argv)
 		}
 		if (_continue)
 			continue;
-		dprintf(STDERR_FILENO, "L%d: unknown instruction %s\n", linenum, dba->input[0]);
-		free_all(&stack, file);
+		UNKNOW_ERROR(linenum, dba->input[0]), free_all(&stack, file), free(buf);
 		exit(EXIT_FAILURE);
-	} free_all(&stack, file);
+	} free_all(&stack, file), free(buf);
 	return (EXIT_SUCCESS);
 }
