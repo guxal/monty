@@ -24,7 +24,7 @@ void myStartupFun(void)
 		__RETURN__("Error: malloc failed", "", "");
 
 	dba->func = malloc((sizeof(instruction_t) * 4) + 1);
-	if (!dba-func)
+	if (!dba->func)
 	{
 		free(dba);
 		__RETURN__("Error: malloc failed", "", "");
@@ -45,23 +45,26 @@ void myStartupFun(void)
  *
  *
  **/
-void free_all(void)
+void free_all(stack_t **stack, FILE *file)
 {
+	stack_t *tmp;
 
 	if (dba != NULL)
 	{
 		if (dba->input != NULL)
 			free(dba->input);
 		free(dba->func);
-		/*
-		*while(dba->func[i].opcode)
-		*{
-		*	free(dba->func[i].opcode);
-		*	i++;
-		*}
-		*free(dba->func);
-		*/
 	}
+	tmp = *stack;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		free(*stack);
+		*stack = tmp;
+	}
+	free(tmp);
+	free(*stack);
+	fclose(file);
 }
 /**
  * main - Init the program, compile code for monty
@@ -108,7 +111,8 @@ int main(int argc, char **argv)
 		if (_continue)
 			continue;
 		fprintf(stderr, "L%d: unknown instruction %s\n", linenum, dba->input[0]);
+		free_all(&stack, file);
 		return (1);
-	} free_all();
+	} free_all(&stack, file);
 	return (0);
 }
