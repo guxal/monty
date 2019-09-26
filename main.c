@@ -4,13 +4,13 @@
  */
 void myStartupFun(void)
 {
-	instruction_t func[] = {{"push", _push}, {"pall", _pall}, {NULL, NULL}};
+	instruction_t func[] = {{"push", _push}, {"pall", _pall}, {"pint", _pint}, {NULL, NULL}};
 
 	dba = malloc(sizeof(dba_t));
 	if (!dba)
 		exit(1);
 
-	dba->func = malloc((sizeof(instruction_t) * 3) + 1);
+	dba->func = malloc((sizeof(instruction_t) * 4) + 1);
 	memcpy(dba->func, func, sizeof(func));
 
 	dba->input = malloc(sizeof(char *) * 3);
