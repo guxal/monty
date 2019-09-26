@@ -14,6 +14,7 @@ void free_all(void);
 typedef int bool;
 #define true 1
 #define false 0
+#define atoa(x) #x
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer

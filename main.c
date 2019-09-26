@@ -24,7 +24,7 @@ void myStartupFun(void)
 		__RETURN__("Error: malloc failed", "", "");
 
 	dba->func = malloc((sizeof(instruction_t) * 4) + 1);
-	if (!dba-func)
+	if (!dba->func)
 	{
 		free(dba);
 		__RETURN__("Error: malloc failed", "", "");
@@ -107,8 +107,9 @@ int main(int argc, char **argv)
 		}
 		if (_continue)
 			continue;
-		fprintf(stderr, "L%d: unknown instruction %s\n", linenum, dba->input[0]);
-		return (1);
+		dprintf(STDERR_FILENO, "L%d: unknown instruction %s\n", linenum, dba->input[0]);
+		exit(EXIT_FAILURE);
 	} free_all();
-	return (0);
+	fclose(file);
+	return (EXIT_SUCCESS);
 }
