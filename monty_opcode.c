@@ -17,7 +17,10 @@ void _push(stack_t **stack, unsigned int line_number)
 		num = dba->input[1];
 
 	if (is_number(num) == 0)
+	{
 		printf("L%d: usage: push integer\n", line_number);
+		exit(1);
+	}
 	new = malloc(sizeof(stack_t));
 	if (!new)
 		perror("malloc:");
@@ -41,4 +44,22 @@ void add_dnodeint(stack_t **stack, stack_t *new)
 	if (*stack)
 		(*stack)->prev = new;
 	*stack = new;
+}
+
+/**
+ * _pall - prints all the values on the stack
+ * @stack: head of stack (double linked list).
+ * @line_number: the number of the line.
+ */
+
+void _pall(stack_t **stack, unsigned int line_number)
+{
+        stack_t *tmp = NULL;
+
+        tmp = *stack;
+        while (tmp)
+        {
+                printf("%d\n", tmp->n);
+                tmp = tmp->next;
+        }
 }

@@ -19,16 +19,6 @@ void myStartupFun (void)
 	}
 }
 /**
- * _pall - prints all the values on the stack
- * @stack: head of stack (double linked list).
- * @line_number: the number of the line.
- */
-
-void _pall(stack_t **stack, unsigned int line_number)
-{
-	printf("david\n");
-}
-/**
  * main - Init the program, compile code for monty
  * @argc: number of arguments
  * @argv: the arguments
