@@ -64,6 +64,7 @@ void free_all(stack_t **stack, FILE *file)
 	}
 	free(tmp);
 	free(*stack);
+	free(dba);
 	fclose(file);
 }
 /**
@@ -111,8 +112,8 @@ int main(int argc, char **argv)
 		if (_continue)
 			continue;
 		dprintf(STDERR_FILENO, "L%d: unknown instruction %s\n", linenum, dba->input[0]);
+		free_all(&stack, file);
 		exit(EXIT_FAILURE);
-	} free_all();
-	fclose(file);
+	} free_all(&stack, file);
 	return (EXIT_SUCCESS);
 }
