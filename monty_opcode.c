@@ -108,15 +108,20 @@ void _pop(stack_t **stack, unsigned int line_number)
  */
 void _swap(stack_t **stack, unsigned int line_number)
 {
-	int temp;
+	stack_t *tmp;
 
-	if (!stack || !*stack || !(*stack)->next)
+	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
 		free_all(stack, dba->file);
 		fprintf(stderr, "L%d: can't add, stack too short", line_number);
 		exit(EXIT_FAILURE);
 	}
-	temp = (*stack)->n;
-	(*stack)->n = (*stack)->next->n;
-	(*stack)->next->n = temp;
+	tmp = (*stack)->next;
+	(*stack)->next = tmp->next;
+	if (tmp->next != NULL)
+		tmp->next->prev = *stack;
+	tmp->next = *stack;
+	(*stack)->prev = tmp;
+	tmp->prev = NULL;
+	*stack = tmp;
 }
