@@ -1,3 +1,4 @@
+#include "monty.h"
 /**
  * _mod - module compute the rest of the division
  * @stack: the stack
