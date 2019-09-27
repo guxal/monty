@@ -77,7 +77,37 @@ void _pint(stack_t **stack, unsigned int line_number)
 	if (!*stack || !stack)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	printf("%d\n", (*stack)->n);
+}
+
+/**
+ * _pop - removes the top element of the stack.
+ * @stack: head of stack (double linked list).
+ * @line_number: the number of the line.
+ */
+
+void _pop(stack_t **stack, unsigned int line_number)
+{
+	stack_t *tmp;
+
+	if (!*stack || !stack)
+	{
+		fprintf(stderr, "L%d: can't pop an e empty stack\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	if ((*stack)->next != NULL)
+	{
+		tmp = (*stack)->next;
+		tmp->prev = NULL;
+		free(*stack);
+		*stack = tmp;
+	}
+	else
+	{
+		free(*stack);
+		*stack = NULL;
+	}
 }
