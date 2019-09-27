@@ -12,19 +12,21 @@ void _push(stack_t **stack, unsigned int line_number)
 	stack_t *new = NULL;
 
 	if (dba->input[1] == NULL)
-		printf("Error push NULL\n");
+		__RETURN__("Error push NULL\n", "", "");
 	else
 		num = dba->input[1];
 
 	if (is_number(num) == 0)
 	{
-		printf("L%d: usage: push integer\n", line_number);
-		exit(1);
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
 	}
 	new = malloc(sizeof(stack_t));
 	if (!new)
-		perror("malloc:");
-
+	{
+		fprintf(stderr ,"Error: malloc failed");
+		exit(EXIT_FAILURE);
+	}
 	new->n = atoi(num);
 	add_dnodeint(stack, new);
 }
