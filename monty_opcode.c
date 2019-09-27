@@ -12,19 +12,24 @@ void _push(stack_t **stack, unsigned int line_number)
 	stack_t *new = NULL;
 
 	if (dba->input[1] == NULL)
+	{
+		free_all(stack, dba->file);
 		__RETURN__("Error push NULL\n", "", "");
+	}
 	else
 		num = dba->input[1];
 
 	if (is_number(num) == 0)
 	{
+		free_all(stack, dba->file);
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	new = malloc(sizeof(stack_t));
 	if (!new)
 	{
-		fprintf(stderr, "Error: malloc failed");
+		free_all(stack, dba->file);
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 	new->n = atoi(num);
