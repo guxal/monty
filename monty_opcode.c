@@ -102,13 +102,13 @@ void _pop(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * _swap - swap
+ * _swap - swaps the top two elements of the stack.
  * @stack: stack
  * @line_number: number of line
  */
 void _swap(stack_t **stack, unsigned int line_number)
 {
-	stack_t *tmp;
+	int num_n;
 
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
@@ -116,12 +116,7 @@ void _swap(stack_t **stack, unsigned int line_number)
 		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	tmp = (*stack)->next;
-	(*stack)->next = tmp->next;
-	if (tmp->next != NULL)
-		tmp->next->prev = *stack;
-	tmp->next = *stack;
-	(*stack)->prev = tmp;
-	tmp->prev = NULL;
-	*stack = tmp;
+	num_n = (*stack)->n;
+	(*stack)->n = (*stack)->next->n;
+	(*stack)->next->n = num_n;
 }
