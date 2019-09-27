@@ -78,3 +78,23 @@ void _div(stack_t **stack, unsigned int line_number)
 	_pop(stack, line_number);
 	(*stack)->n = div;
 }
+/**
+ * _mul - multiplies the top in the stack
+ * @stack: the stack
+ * @line_number: the line number
+ */
+void _mul(stack_t **stack, unsigned int line_number)
+{
+	int mul;
+
+	if (*stack == NULL || (*stack)->next == NULL)
+	{
+		fprintf(stderr, "L%d: can't mul, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	mul = (*stack)->next->n * (*stack)->n;
+
+	_pop(stack, line_number);
+	(*stack)->n = mul;
+}
