@@ -109,7 +109,7 @@ int main(int argc, char **argv)
 			i++;
 		if (i == len)
 			continue;
-		dba->input[0] = strtok(dba->line, delim), dba->input[1] = strtok(NULL, delim);
+		dba->input[0] = strtok(buf, delim), dba->input[1] = strtok(NULL, delim);
 		i = 0;
 		while (dba->func[i].opcode != NULL)
 		{
