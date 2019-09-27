@@ -12,7 +12,10 @@ void _push(stack_t **stack, unsigned int line_number)
 	stack_t *new = NULL;
 
 	if (dba->input[1] == NULL)
-		__RETURN__("Error push NULL\n", "", "");
+	{
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
 	else
 		num = dba->input[1];
 
