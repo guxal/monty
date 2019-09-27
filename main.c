@@ -8,7 +8,7 @@
  **/
 void __RETURN__(char *string, char *str, char *str1)
 {
-	dprintf(STDERR_FILENO, string, str, str1);
+	dprintf(STDOUT_FILENO, string, str, str1);
 	exit(EXIT_FAILURE);
 }
 /**
