@@ -21,13 +21,13 @@ void myStartupFun(void)
 
 	dba = malloc(sizeof(dba_t));
 	if (!dba)
-		__RETURN__("Error: malloc failed", "", "");
+		__RETURN__("Error: malloc failed\n", "", "");
 
 	dba->func = malloc((sizeof(instruction_t) * 4) + 1);
 	if (!dba->func)
 	{
 		free(dba);
-		__RETURN__("Error: malloc failed", "", "");
+		__RETURN__("Error: malloc failed\n", "", "");
 	}
 	memcpy(dba->func, func, sizeof(func));
 
@@ -36,7 +36,7 @@ void myStartupFun(void)
 	{
 		free(dba);
 		free(dba->func);
-		__RETURN__("Error: malloc failed", "", "");
+		__RETURN__("Error: malloc failed\n", "", "");
 	}
 }
 
