@@ -104,7 +104,7 @@ int main(int argc, char **argv)
 	myStartupFun(), dba->file = file;
 	while (getline(&buf, &buf_size, file) > 0)
 	{
-		dba->line = buf, len = strlen(buf), _continue = false, linenum++;
+		dba->line = buf, len = strlen(buf), _continue = false, linenum++, i = 0;
 		while ((dba->line[i] == delim[0]) || (dba->line[i] == delim[1]))
 			i++;
 		if (i == len)
