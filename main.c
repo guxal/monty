@@ -64,6 +64,7 @@ void free_all(stack_t **stack, FILE *file)
 	}
 	free(tmp);
 	free(*stack);
+	free(dba->line);
 	free(dba);
 	fclose(file);
 }
@@ -88,7 +89,7 @@ void UNKNOW_ERROR(unsigned int linenum, char *input)
 
 int main(int argc, char **argv)
 {
-	char *buf = NULL, *filename = NULL, *delim = "\n ", *new = NULL;
+	char *filename = NULL, *delim = "\n ";
 	size_t buf_size = 0;
 	FILE *file;
 	int i = 0, len = 0, _continue;
@@ -100,15 +101,15 @@ int main(int argc, char **argv)
 	filename = argv[argc - 1], file = fopen(filename, "r");
 	if (file == NULL)
 		__RETURN__("Error: Can't open file %s\n", filename, "");
-	myStartupFun();
-	while (getline(&buf, &buf_size, file) > 0)
+	myStartupFun(), dba->file = file;
+	while (getline(&dba->line, &buf_size, file) > 0)
 	{
-		new = buf, len = strlen(buf), _continue = false, linenum++;
-		while ((new[i] == delim[0]) || (new[i] == delim[1]))
+		len = strlen(dba->line), _continue = false, linenum++;
+		while ((dba->line[i] == delim[0]) || (dba->line[i] == delim[1]))
 			i++;
 		if (i == len)
 			continue;
-		dba->input[0] = strtok(buf, delim), dba->input[1] = strtok(NULL, delim);
+		dba->input[0] = strtok(dba->line, delim), dba->input[1] = strtok(NULL, delim);
 		i = 0;
 		while (dba->func[i].opcode != NULL)
 		{
@@ -120,8 +121,8 @@ int main(int argc, char **argv)
 		}
 		if (_continue)
 			continue;
-		UNKNOW_ERROR(linenum, dba->input[0]), free_all(&stack, file), free(buf);
+		UNKNOW_ERROR(linenum, dba->input[0]), free_all(&stack, file);
 		exit(EXIT_FAILURE);
-	} free_all(&stack, file), free(buf);
+	} free_all(&stack, file);
 	return (EXIT_SUCCESS);
 }
