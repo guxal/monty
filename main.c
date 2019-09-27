@@ -19,13 +19,13 @@ void myStartupFun(void)
 	instruction_t func[] = { {"push", _push}, {"pall", _pall},
 		{"pint", _pint}, {"pop", _pop}, {"swap", _swap},
 		{"nop", _nop}, {"add", _add}, {"sub", _sub},
-		{"div", _div}, {NULL, NULL} };
+		{"div", _div}, {"mul", _mul}, {NULL, NULL} };
 
 	dba = malloc(sizeof(dba_t));
 	if (!dba)
 		__RETURN__("Error: malloc failed\n", "", "");
 
-	dba->func = malloc((sizeof(instruction_t) * 10) + 1);
+	dba->func = malloc((sizeof(instruction_t) * 11) + 1);
 	if (!dba->func)
 	{
 		free(dba);
