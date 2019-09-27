@@ -13,8 +13,9 @@ void _push(stack_t **stack, unsigned int line_number)
 
 	if (dba->input[1] == NULL)
 	{
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		free_all(stack, dba->file);
-		__RETURN__("Error push NULL\n", "", "");
+		exit(EXIT_FAILURE);
 	}
 	else
 		num = dba->input[1];
