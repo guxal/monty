@@ -52,3 +52,29 @@ void _sub(stack_t **stack, unsigned int line_number)
 	_pop(stack, line_number);
 	(*stack)->n = sub;
 }
+/**
+ * _div - divides the top stack elements
+ * @stack: the stack
+ * @line_number: the line number
+ **/
+void _div(stack_t **stack, unsigned int line_number)
+{
+	int div;
+
+	if (*stack == NULL || (*stack)->next == NULL)
+	{
+		fprintf(stderr, "L%d: can't div, stack too short", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	if ((*stack)->n == 0)
+	{
+		fprintf(stderr, "L%d: division by zero", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	div = (*stack)->next->n / (*stack)->n;
+
+	_pop(stack, line_number);
+	(*stack)->n = div;
+}
