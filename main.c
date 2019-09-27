@@ -17,13 +17,13 @@ void __RETURN__(char *string, char *str, char *str1)
 void myStartupFun(void)
 {
 	instruction_t func[] = { {"push", _push}, {"pall", _pall},
-		{"pint", _pint}, {NULL, NULL}};
+		{"pint", _pint}, {"pop", _pop}, {NULL, NULL} };
 
 	dba = malloc(sizeof(dba_t));
 	if (!dba)
 		__RETURN__("Error: malloc failed\n", "", "");
 
-	dba->func = malloc((sizeof(instruction_t) * 4) + 1);
+	dba->func = malloc((sizeof(instruction_t) * 5) + 1);
 	if (!dba->func)
 	{
 		free(dba);
