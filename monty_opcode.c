@@ -37,23 +37,6 @@ void _push(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * add_dnodeint - Add node in the first position
- * @stack: the header of de double linked list
- * @new: new
- *
- * Return: double linked list
- */
-
-void add_dnodeint(stack_t **stack, stack_t *new)
-{
-	new->prev = NULL;
-	new->next = *stack;
-	if (*stack)
-		(*stack)->prev = new;
-	*stack = new;
-}
-
-/**
  * _pall - prints all the values on the stack
  * @stack: head of stack (double linked list).
  * @line_number: the number of the line.
@@ -115,4 +98,21 @@ void _pop(stack_t **stack, unsigned int line_number)
 		free(*stack);
 		*stack = NULL;
 	}
+}
+
+/**
+ *
+ *
+ */
+void _swap(stack_t **stack, unsigned int line_number)
+{
+	int temp;
+	(void)line_number;
+
+	if (!stack || !*stack || !(*stack)->next)
+		
+
+	temp = (*stack)->n;
+	(*stack)->n = (*stack)->next->n;
+	(*stack)->next->n = temp;
 }
