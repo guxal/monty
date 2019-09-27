@@ -14,6 +14,7 @@ void _push(stack_t **stack, unsigned int line_number)
 	if (dba->input[1] == NULL)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		free_all(stack, dba->file);
 		exit(EXIT_FAILURE);
 	}
 	else
@@ -21,13 +22,15 @@ void _push(stack_t **stack, unsigned int line_number)
 
 	if (is_number(num) == 0)
 	{
+		free_all(stack, dba->file);
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	new = malloc(sizeof(stack_t));
 	if (!new)
 	{
-		fprintf(stderr, "Error: malloc failed");
+		free_all(stack, dba->file);
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 	new->n = atoi(num);
