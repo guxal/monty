@@ -112,6 +112,8 @@ int main(int argc, char **argv)
 		if (i == len)
 			continue;
 		dba->input[0] = strtok(buf, delim), dba->input[1] = strtok(NULL, delim);
+		if (dba->input[0][0] == '#')
+			continue;
 		i = 0;
 		while (dba->func[i].opcode != NULL)
 		{
