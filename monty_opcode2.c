@@ -49,3 +49,30 @@ void _pchar(stack_t **stack, unsigned int line_number)
 	putchar((*stack)->n);
 	putchar(10);
 }
+
+/**
+ * _pstr - print string
+ * @stack: the stack
+ * @line_number: number of the line error
+ */
+
+void _pstr(stack_t **stack, unsigned int line_number)
+{
+	stack_t *tmp;
+	(void) line_number;
+
+	if (stack == NULL || *stack == NULL)
+		putchar(10);
+	else
+	{
+		tmp = *stack;
+		while (tmp)
+		{
+			if (tmp->n <= 0 || tmp->n > 127)
+				break;
+			putchar(tmp->n);
+			tmp = tmp->next;
+		}
+		putchar(10);
+	}
+}
